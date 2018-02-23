@@ -17,35 +17,57 @@ contract TestSlotManager {
     address[] typeCReservedTimeSlotContracts;
 
     struct TimeSlot {
-        uint startTime;
         bool reserved;
         address owner;
         uint price;
     }
-    //uint = slotID,
-    mapping(uint => TimeSlot) timeSlots;
 
-    function getFreeSlots() view returns(uint[94]){
+    mapping(bytes32 => mapping(uint => TimeSlot)) typeSpecificTimeSlots;
+
+    function getFreeSlots(bytes32 _productType) view returns(uint[94]){
         uint[94] freeSlots;
         for(uint i=0; i<94; i++){
-            if(timeSlots[i].reserved == false){
+            if(typeSpecificTimeSlots[_productType][i].reserved == false){
                 freeSlots[i]=0;
             }
-            if(timeSlots[i].reserved == true){
+            if(typeSpecificTimeSlots[_productType][i].reserved == true){
                 freeSlots[i]=1;
             }
         }
         return freeSlots;
     }
 
-    function createNewTimeSlotContract(uint _timeSlotID, address _deliverant) returns(address) {
+    function createNewTimeSlotContract(bytes32 _productType, uint _timeSlotID, address _deliverant) returns(address) {
+        if(_productType == typeA){
         address newAddressA = address(new TimeSlotContractTypeA(_deliverant));
         typeAReservedTimeSlotContracts.push(newAddressA);
-        timeSlots[0];
+        typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
+        typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
+        }
+        if(_productType == typeB){
+        address newAddressB = address(new TimeSlotContractTypeB(_deliverant));
+        typeBReservedTimeSlotContracts.push(newAddressB);
+        typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
+        typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
+        }
+        if(_productType == typeC){
+        address newAddressC = address(new TimeSlotContractTypeC(_deliverant));
+        typeCReservedTimeSlotContracts.push(newAddressC);
+        typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
+        typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
+        }
     }
 
     function getProductGroupes() view returns(bytes32,bytes32,bytes32){
          return(typeA,typeB,typeC);
+    }
+
+    function setPrice(uint _timeSlotID, uint _price, bytes32 _productType) {
+        typeSpecificTimeSlots[_productType][_timeSlotID].price = _price;
+    }
+    
+    function getTimeSlotPrice(uint _timeSlotID, bytes32 _productType) view returns(uint) {
+        return typeSpecificTimeSlots[_productType][_timeSlotID].price;
     }
 }
 
