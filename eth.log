@@ -1,0 +1,25 @@
+INFO [02-23|20:38:17] Maximum peer count                       ETH=25 LES=0 total=25
+INFO [02-23|20:38:17] Starting peer-to-peer node               instance=Geth/v1.8.1-stable-1e67410e/linux-amd64/go1.10
+INFO [02-23|20:38:17] Allocated cache and file handles         database=/home/harmoniemand/code/blockhack/data/geth/chaindata cache=768 handles=512
+INFO [02-23|20:38:17] Writing default main-net genesis block 
+INFO [02-23|20:38:17] Persisted trie from memory database      nodes=12356 size=2.34mB time=41.982272ms gcnodes=0 gcsize=0.00B gctime=0s livenodes=1 livesize=0.00B
+INFO [02-23|20:38:17] Initialised chain configuration          config="{ChainID: 1 Homestead: 1150000 DAO: 1920000 DAOSupport: true EIP150: 2463000 EIP155: 2675000 EIP158: 2675000 Byzantium: 4370000 Engine: ethash}"
+INFO [02-23|20:38:17] Disk storage enabled for ethash caches   dir=/home/harmoniemand/code/blockhack/data/geth/ethash count=3
+INFO [02-23|20:38:17] Disk storage enabled for ethash DAGs     dir=/home/harmoniemand/.ethash                         count=2
+INFO [02-23|20:38:17] Initialising Ethereum protocol           versions="[63 62]" network=456719
+INFO [02-23|20:38:17] Loaded most recent local header          number=0 hash=d4e567…cb8fa3 td=17179869184
+INFO [02-23|20:38:17] Loaded most recent local full block      number=0 hash=d4e567…cb8fa3 td=17179869184
+INFO [02-23|20:38:17] Loaded most recent local fast block      number=0 hash=d4e567…cb8fa3 td=17179869184
+INFO [02-23|20:38:17] Regenerated local transaction journal    transactions=0 accounts=0
+INFO [02-23|20:38:17] Starting P2P networking 
+INFO [02-23|20:38:19] UDP listener up                          self=enode://fb783aaeb9f60c90c913ef6a016d270b8b8ff7469748a89722930d2e6af3d615336498a52469a93d1193413ea73995f98ea6b4996d28ab369878388569032fea@[::]:30303
+INFO [02-23|20:38:19] RLPx listener up                         self=enode://fb783aaeb9f60c90c913ef6a016d270b8b8ff7469748a89722930d2e6af3d615336498a52469a93d1193413ea73995f98ea6b4996d28ab369878388569032fea@[::]:30303
+INFO [02-23|20:38:19] IPC endpoint opened                      url=/home/harmoniemand/code/blockhack/data/geth.ipc
+WARN [02-23|20:38:23] System clock seems off by 2m7.362149862s, which can prevent network connectivity 
+WARN [02-23|20:38:23] Please enable network time synchronisation in system settings. 
+INFO [02-23|20:38:59] IPC endpoint closed                      endpoint=/home/harmoniemand/code/blockhack/data/geth.ipc
+INFO [02-23|20:38:59] Blockchain manager stopped 
+INFO [02-23|20:38:59] Stopping Ethereum protocol 
+INFO [02-23|20:38:59] Ethereum protocol stopped 
+INFO [02-23|20:38:59] Transaction pool stopped 
+INFO [02-23|20:38:59] Database closed                          database=/home/harmoniemand/code/blockhack/data/geth/chaindata

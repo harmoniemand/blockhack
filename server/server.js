@@ -1,10 +1,22 @@
 
 var express = require('express');
 var app = express();
+var w3service = require("./services/web3.service");
 
 
 app.get('/states', function (req, res) {
-    res.json({ msg: 'success' });
+
+    // Aktuellen User ermitteln (aus Authentication Header)
+
+    // web3 starten
+
+    // connection zu geth herstellen
+
+    // web3 account des users verwenden
+
+    // smart contract ausführen
+    var s3 = new w3service();
+    res.json(s3.getOpenSlots());
 });
 
 

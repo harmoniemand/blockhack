@@ -1,0 +1,8 @@
+=============== Feb 23, 2018 (CET) ===============
+20:38:19.798965 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+20:38:19.802892 db@open opening
+20:38:19.803082 version@stat F·[] S·0B[] Sc·[]
+20:38:19.811553 db@janitor F·2 G·0
+20:38:19.811574 db@open done T·8.670603ms
+20:38:59.946955 db@close closing
+20:38:59.947121 db@close done T·164.024µs
