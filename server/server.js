@@ -1,6 +1,7 @@
 
 var express = require('express');
 var app = express();
+var w3service = require("./services/web3.service");
 
 
 app.get('/states', function (req, res) {
@@ -14,8 +15,8 @@ app.get('/states', function (req, res) {
     // web3 account des users verwenden
 
     // smart contract ausführen
-
-    res.json({ msg: 'success' });
+    var s3 = new w3service();
+    res.json(s3.getOpenSlots());
 });
 
 
