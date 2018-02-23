@@ -4,6 +4,17 @@ var app = express();
 
 
 app.get('/states', function (req, res) {
+
+    // Aktuellen User ermitteln (aus Authentication Header)
+
+    // web3 starten
+
+    // connection zu geth herstellen
+
+    // web3 account des users verwenden
+
+    // smart contract ausführen
+
     res.json({ msg: 'success' });
 });
 
