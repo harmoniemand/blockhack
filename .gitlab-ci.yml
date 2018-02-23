@@ -2,6 +2,7 @@
 build_image:
   stage: deploy
   script:
+    - cd etherium-node
     - docker-compose down
     - docker-compose build
     - docker-compose up -d 
