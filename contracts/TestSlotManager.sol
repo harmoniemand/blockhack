@@ -2,7 +2,8 @@ pragma solidity ^0.4.16;
 
 contract TestSlotManager {
     address private owner;
-    function TestSlotManager() {
+
+    function TestSlotManager() public{
         owner = msg.sender;
     }
 
@@ -25,8 +26,8 @@ contract TestSlotManager {
     //Product Type => ( timeSlotContractIndex => TimeSlot "Object")
     mapping(bytes32 => mapping(uint => TimeSlot)) typeSpecificTimeSlots;
 
-    function getFreeSlots(bytes32 _productType) view returns(uint[96]){
-        uint[96] freeSlots;
+    function getFreeSlots(bytes32 _productType) view public returns(uint[96]){
+        uint[96] memory freeSlots;
         for(uint i=0; i<96; i++){
             if(typeSpecificTimeSlots[_productType][i].reserved == false){
                 freeSlots[i]=0;
@@ -38,7 +39,7 @@ contract TestSlotManager {
         return freeSlots;
     }
 
-    function createNewTimeSlotContract(bytes32 _productType, uint _timeSlotID, address _deliverant) returns(address) {
+    function createNewTimeSlotContract(bytes32 _productType, uint _timeSlotID, address _deliverant) public returns(address) {
         if(_productType == typeA){
         address newAddressA = address(new TimeSlotContractTypeA(_deliverant));
         typeAReservedTimeSlotContracts.push(newAddressA);
@@ -59,15 +60,15 @@ contract TestSlotManager {
         }
     }
 
-    function getProductGroupes() view returns(bytes32,bytes32,bytes32){
+    function getProductGroupes() view public returns(bytes32,bytes32,bytes32) {
          return(typeA,typeB,typeC);
     }
 
-    function setPrice(uint _timeSlotID, uint _price, bytes32 _productType) {
+    function setPrice(uint _timeSlotID, uint _price, bytes32 _productType) public {
         typeSpecificTimeSlots[_productType][_timeSlotID].price = _price;
     }
 
-    function getTimeSlotPrice(uint _timeSlotID, bytes32 _productType) view returns(uint) {
+    function getTimeSlotPrice(uint _timeSlotID, bytes32 _productType) view public returns(uint) {
         return typeSpecificTimeSlots[_productType][_timeSlotID].price;
     }
 }
@@ -75,7 +76,7 @@ contract TestSlotManager {
 contract TimeSlotContractTypeA {
     address owner;
     //add only SlotManager modifier
-    function TimeSlotContractTypeA(address _deliverant) {
+    function TimeSlotContractTypeA(address _deliverant) public {
         owner = _deliverant;
     }
 }
@@ -83,7 +84,7 @@ contract TimeSlotContractTypeA {
 contract TimeSlotContractTypeB {
     address owner;
     //add only SlotManager modifier
-    function TimeSlotContractTypeB(address _deliverant) {
+    function TimeSlotContractTypeB(address _deliverant) public {
         owner = _deliverant;
     }
 }
@@ -91,7 +92,7 @@ contract TimeSlotContractTypeB {
 contract TimeSlotContractTypeC {
     address owner;
     //add only SlotManager modifier
-    function TimeSlotContractTypeC(address _deliverant) {
+    function TimeSlotContractTypeC(address _deliverant) public {
         owner = _deliverant;
     }
 }
