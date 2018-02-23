@@ -22,6 +22,7 @@ contract TestSlotManager {
         uint price;
     }
 
+    //Product Type => ( timeSlotContractIndex => TimeSlot "Object")
     mapping(bytes32 => mapping(uint => TimeSlot)) typeSpecificTimeSlots;
 
     function getFreeSlots(bytes32 _productType) view returns(uint[94]){
@@ -65,7 +66,7 @@ contract TestSlotManager {
     function setPrice(uint _timeSlotID, uint _price, bytes32 _productType) {
         typeSpecificTimeSlots[_productType][_timeSlotID].price = _price;
     }
-    
+
     function getTimeSlotPrice(uint _timeSlotID, bytes32 _productType) view returns(uint) {
         return typeSpecificTimeSlots[_productType][_timeSlotID].price;
     }
