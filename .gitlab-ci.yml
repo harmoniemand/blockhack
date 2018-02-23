@@ -1,5 +1,5 @@
 
-build_image:
+start_etherium_node:
   stage: deploy
   script:
     - cd etherium-node

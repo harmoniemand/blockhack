@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+
+$enable-rounded: false;
+$navbar-height: 40px;
+
+$font-family-sans-serif: Roboto, "Helvetica Neue", sans-serif;
+$font-family-serif: Roboto, "Helvetica Neue", sans-serif;
+$font-family-monospace: Roboto, "Helvetica Neue", sans-serif;
+$font-family-base: $font-family-sans-serif !default;
+
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
