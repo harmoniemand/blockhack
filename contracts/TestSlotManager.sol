@@ -25,9 +25,9 @@ contract TestSlotManager {
     //Product Type => ( timeSlotContractIndex => TimeSlot "Object")
     mapping(bytes32 => mapping(uint => TimeSlot)) typeSpecificTimeSlots;
 
-    function getFreeSlots(bytes32 _productType) view returns(uint[94]){
-        uint[94] freeSlots;
-        for(uint i=0; i<94; i++){
+    function getFreeSlots(bytes32 _productType) view returns(uint[96]){
+        uint[96] freeSlots;
+        for(uint i=0; i<96; i++){
             if(typeSpecificTimeSlots[_productType][i].reserved == false){
                 freeSlots[i]=0;
             }
