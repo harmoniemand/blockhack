@@ -1,6 +1,18 @@
 pragma solidity ^0.4.16;
 
 contract TestSlotManager {
+
+/*
+TBD:
+
+- Supplier: get all my booked time slots
+- Supplier: pay for aquiring time slot
+- Modifier: Only TestSlotManager sets owner though aquireNewTimeSlotContract
+- aquire multiple slots at the same time
+
+*/
+
+
     address private owner;
 
     function TestSlotManager() public{
