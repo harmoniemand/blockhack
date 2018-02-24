@@ -51,34 +51,33 @@ TBD:
 
 
     //Product Type => ( timeSlotContractIndex => TimeSlot "Object")
-    //mapping(bytes32 => mapping(uint => TimeSlot)) typeSpecificTimeSlots;
     mapping (address => SupplierBookings) supplierToTimeSlotMapping;
-    mapping(bytes32 => mapping(bytes32 => mapping(uint => TimeSlot)) typeSpecificTimeSlots;
+    //Product Type => (date => ( timeSlotContractIndex => TimeSlot "Object"))
+    mapping(bytes32 => mapping(bytes32 => mapping(uint => TimeSlot))) typeSpecificTimeSlots;
 
     // all slots of a day
     mapping (bytes32 => uint[96]) daySlots;
 
-    function setPrice(uint _timeSlotID, uint _price, bytes32 _productType) public {
-        typeSpecificTimeSlots[_productType][_timeSlotID].price = _price;
+    function setPrice(bytes32 _date, uint _timeSlotID, uint _price, bytes32 _productType) public {
+        typeSpecificTimeSlots[_productType][_date][_timeSlotID].price = _price;
     }
-
 
     function getProductGroups() view public returns(bytes32,bytes32,bytes32) {
          return(typeA,typeB,typeC);
     }
 
 
-    function getTimeSlotPrice(uint _timeSlotID, bytes32 _productType) view public returns(uint) {
-        return typeSpecificTimeSlots[_productType][_timeSlotID].price;
+    function getTimeSlotPrice(bytes32 _date, uint _timeSlotID, bytes32 _productType) view public returns(uint) {
+        return typeSpecificTimeSlots[_productType][_date][_timeSlotID].price;
     }
 
     function getFreeSlots(bytes32 _productType, bytes32 _date) view public returns(uint[96]){
         uint[96] memory freeSlots;
         for(uint i=0; i<96; i++){
-            if(typeSpecificTimeSlots[_productType][i].reserved == false){
+            if(typeSpecificTimeSlots[_productType][_date][i].reserved == false){
                 freeSlots[i]=0;
             }
-            if(typeSpecificTimeSlots[_productType][i].reserved == true){
+            if(typeSpecificTimeSlots[_productType][_date][i].reserved == true){
                 freeSlots[i]=1;
             }
         }
@@ -86,8 +85,8 @@ TBD:
     }
 
     function aquireNewTimeSlotContract(bytes32 _productType, uint _timeSlotID, address _deliverant, bytes32 _date) public payable onlyBy(owner) returns(address) {
-        uint price = getTimeSlotPrice(_timeSlotID, _productType);
-        if(!typeSpecificTimeSlots[_productType][_timeSlotID].reserved == false){revert();}
+        uint price = getTimeSlotPrice(_date,_timeSlotID, _productType);
+        if(!typeSpecificTimeSlots[_productType][_date][_timeSlotID].reserved == false){revert();}
         if(msg.value <= price) {
             if(!owner.send(msg.value)) {
             revert();
@@ -96,8 +95,8 @@ TBD:
             uint timeA = 15*_timeSlotID;
             address newAddressA = address(new TimeSlotContractTypeA(_deliverant,_date,timeA));
         //    typeAReservedTimeSlotContracts.push(newAddressA);
-            typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
-            typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
+            typeSpecificTimeSlots[_productType][_date][_timeSlotID].reserved = true;
+            typeSpecificTimeSlots[_productType][_date][_timeSlotID].owner = _deliverant;
             supplierToTimeSlotMapping[_deliverant].timeSlotAddresses.push(newAddressA);
             return newAddressA;
             }
@@ -107,8 +106,8 @@ TBD:
             uint timeB = 15*_timeSlotID;
             address newAddressB = address(new TimeSlotContractTypeB(_deliverant,_date,timeB));
       //      typeBReservedTimeSlotContracts.push(newAddressB);
-            typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
-            typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
+            typeSpecificTimeSlots[_productType][_date][_timeSlotID].reserved = true;
+            typeSpecificTimeSlots[_productType][_date][_timeSlotID].owner = _deliverant;
             supplierToTimeSlotMapping[_deliverant].timeSlotAddresses.push(newAddressB);
             return newAddressB;
         }
@@ -116,8 +115,8 @@ TBD:
             uint timeC = 15*_timeSlotID;
             address newAddressC = address(new TimeSlotContractTypeC(_deliverant,_date,timeC));
       //      typeCReservedTimeSlotContracts.push(newAddressC);
-            typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
-            typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
+            typeSpecificTimeSlots[_productType][_date][_timeSlotID].reserved = true;
+            typeSpecificTimeSlots[_productType][_date][_timeSlotID].owner = _deliverant;
             supplierToTimeSlotMapping[_deliverant].timeSlotAddresses.push(newAddressC);
             return newAddressC;
         }
