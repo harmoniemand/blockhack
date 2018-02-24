@@ -31,13 +31,71 @@ module.exports = function () {
                 "type": "function"
             },
             {
-                "constant": true,
-                "inputs": [],
-                "name": "getSupplierTimeslots",
+                "constant": false,
+                "inputs": [
+                    {
+                        "name": "_timeSlotID",
+                        "type": "uint256"
+                    },
+                    {
+                        "name": "_price",
+                        "type": "uint256"
+                    },
+                    {
+                        "name": "_productType",
+                        "type": "bytes32"
+                    }
+                ],
+                "name": "setPrice",
+                "outputs": [],
+                "payable": false,
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "constant": false,
+                "inputs": [
+                    {
+                        "name": "_productType",
+                        "type": "bytes32"
+                    },
+                    {
+                        "name": "_timeSlotID",
+                        "type": "uint256"
+                    },
+                    {
+                        "name": "_deliverant",
+                        "type": "address"
+                    },
+                    {
+                        "name": "_date",
+                        "type": "bytes32"
+                    }
+                ],
+                "name": "aquireNewTimeSlotContract",
                 "outputs": [
                     {
                         "name": "",
-                        "type": "address[]"
+                        "type": "address"
+                    }
+                ],
+                "payable": true,
+                "stateMutability": "payable",
+                "type": "function"
+            },
+            {
+                "constant": true,
+                "inputs": [
+                    {
+                        "name": "_productType",
+                        "type": "bytes32"
+                    }
+                ],
+                "name": "getFreeSlots",
+                "outputs": [
+                    {
+                        "name": "",
+                        "type": "uint256[10]"
                     }
                 ],
                 "payable": false,
@@ -68,74 +126,16 @@ module.exports = function () {
             },
             {
                 "constant": true,
-                "inputs": [
-                    {
-                        "name": "_productType",
-                        "type": "bytes32"
-                    }
-                ],
-                "name": "getFreeSlots",
+                "inputs": [],
+                "name": "getSupplierTimeslots",
                 "outputs": [
                     {
                         "name": "",
-                        "type": "uint256[96]"
+                        "type": "address[]"
                     }
                 ],
                 "payable": false,
                 "stateMutability": "view",
-                "type": "function"
-            },
-            {
-                "constant": false,
-                "inputs": [
-                    {
-                        "name": "_productType",
-                        "type": "bytes32"
-                    },
-                    {
-                        "name": "_timeSlotID",
-                        "type": "uint256"
-                    },
-                    {
-                        "name": "_deliverant",
-                        "type": "address"
-                    },
-                    {
-                        "name": "_date",
-                        "type": "bytes32"
-                    }
-                ],
-                "name": "aquireNewTimeSlotContract",
-                "outputs": [
-                    {
-                        "name": "",
-                        "type": "address"
-                    }
-                ],
-                "payable": false,
-                "stateMutability": "nonpayable",
-                "type": "function"
-            },
-            {
-                "constant": false,
-                "inputs": [
-                    {
-                        "name": "_timeSlotID",
-                        "type": "uint256"
-                    },
-                    {
-                        "name": "_price",
-                        "type": "uint256"
-                    },
-                    {
-                        "name": "_productType",
-                        "type": "bytes32"
-                    }
-                ],
-                "name": "setPrice",
-                "outputs": [],
-                "payable": false,
-                "stateMutability": "nonpayable",
                 "type": "function"
             },
             {
@@ -145,7 +145,6 @@ module.exports = function () {
                 "type": "constructor"
             }
         ]
-
         return abi;
     };
 
