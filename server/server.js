@@ -1,20 +1,39 @@
 
 var express = require('express');
 var app = express();
-var w3service = require("./services/web3.service");
 
-var cors = require('cors')
+var w3service = require("./services/web3.service.mock");
+var w3service = new w3service();
 
+
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+
+var cors = require('cors');
 app.use(cors());
 
-app.get('/productgroups', function (req, res) {
-    var s3 = new w3service();
-    res.json(s3.getProductGroups());
+app.get('/slots/:warehouse/:productgroup', function (req, res) {
+    w3service.getOpenSlots(req.params.productgroup, req.params.warehouse).then(result => {
+        res.json(result);
+    });
+});
+
+app.get('/productgroups/:warehouse', function (req, res) {
+    console.log(req.params.warehouse);  
+    w3service.getProductGroups(req.params.warehouse).then(result => {
+        res.json(result);  
+    });
 });
 
 app.get('/warehouses', function (req, res) {
-    var s3 = new w3service();
-    res.json(s3.getProductGroups());
+    w3service.getWarehouses().then(result => {
+        res.json(result);  
+    });
+});
+
+app.post('/acquireslots', function (req, res) {
+    console.log(req.body);
+    res.json({ msg: 'success'});
 });
 
 
