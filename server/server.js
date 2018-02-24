@@ -2,7 +2,7 @@
 var express = require('express');
 var app = express();
 
-var w3service = require("./services/web3.service.mock");
+var w3service = require("./services/web3.service");
 var w3service = new w3service();
 
 
