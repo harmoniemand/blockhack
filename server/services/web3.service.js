@@ -8,40 +8,49 @@ var contractAdress = '0x89925ce49720c48cf5ece45d3dd1494699257573';
 var web3 = new Web3(new Web3.providers.HttpProvider('http://172.20.189.103:8545'));
 
 module.exports = function () {
+
     var that = this;
 
-    that.getWarehouses = function() {
-        var wareHouses = [
-                {'Name':'Möckmühl', 'address':'0x89925ce49720c48cf5ece45d3dd1494699257573'}, 
-                {'Name':'Osterfeld', 'address':'0xe628ed5cd11cd9c42b7ee0286d91be1f310fbd77'}, 
-                {'Name':'Lübbenau', 'address':'0x29391653db57c32e9aad9c13a28cd70da602004b'}, 
-                {'Name':'Dortmund', 'address':'0xd23eb787686b0a6769eef34c38bd54fd91a21b36'}, 
+    that.getWarehouses = function () {
+        return new Promise((resolve, reject) => {
+            var wareHouses = [
+                { 'ID': 1, 'address': '0xe91adf948970b65cde5d71a58b64f3e646986b7b' },
+                { 'ID': 2, 'address': '0x8718940f6107a8fa4f89499a483e510a41593dbc' },
+                { 'ID': 3, 'address': '0x5714941f7abf6661bc4e3c53df18c99c0f7afb45' },
+                { 'ID': 4, 'address': '0x151057d0709d07e81ebc892aa2ed8e21abeb7ec6' },
             ]
-        return wareHouses
-    }
+            resolve(wareHouses);
+        });
+    };
 
     that.getOpenSlots = function (pg, wareHouse) {
-    }
+    };
 
     that.getProductGroups = function (wareHouse) {
-        return new Promise((resolve, reject)=>{
+        return new Promise((resolve, reject) => {
 
-        var myContract = new web3.eth.Contract(abis.getTimeSlotManagerAbi(), wareHouse);
+            var myContract = new web3.eth.Contract(abis.getTimeSlotManagerAbi(), wareHouse);
 
-        myContract.methods.getProductGroupes().call().then(function (val) {
-            ret = val;
-            Object.keys(val).forEach(element => {
-                val[element] = web3.utils.hexToAscii(val[element]);
+            myContract.methods.getProductGroups().call().then(function (val) {
+                ret = val;
+                Object.keys(val).forEach(element => {
+                    val[element] = web3.utils.hexToAscii(val[element]);
+                });
+                resolve(val);
             });
-            resolve(val);
         });
-    })
-}
+    };
+
+
 
     that.acquireSlots = function (slots, date, pg, wareHouse) {
-        var myContract = new web3.eth.Contract(abis.getTimeSlotManagerAbi(), wareHouse);
-        return true;
+        return new Promise((resolve, reject) => {
+
+            var myContract = new web3.eth.Contract(abis.getTimeSlotManagerAbi(), wareHouse);
+            return true;
+            resolve(true);
+        });
     }
 
     return that;
-};
+}
