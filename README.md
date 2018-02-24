@@ -36,6 +36,30 @@ Addresse:
 Daten:
 leer
 
+## Nummer 5:
+
+Addresse:
+0x5783e26585a9b4e4a6ab511cd308dee52ade947f
+
+Daten:
+leer
+
+## Nummer 6:
+
+Addresse:
+0x44a7c68064b29817353b63f54cab516c4ae8b321
+
+Daten:
+leer
+
+## Nummer 7:
+
+Addresse:
+0x8b2a506f7d17fdc37671249497edc4d37db12fb0
+
+Daten:
+leer
+
 # TimeSlot-Contracts:
 
 ## Nummer 1:
