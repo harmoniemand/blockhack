@@ -41,6 +41,18 @@ TBD:
     mapping(bytes32 => mapping(uint => TimeSlot)) typeSpecificTimeSlots;
     mapping (address => SupplierBookings) supplierToTimeSlotMapping;
 
+    function setPrice(uint _timeSlotID, uint _price, bytes32 _productType) public {
+        typeSpecificTimeSlots[_productType][_timeSlotID].price = _price;
+    }
+
+    function getProductGroups() view public returns(bytes32,bytes32,bytes32) {
+         return(typeA,typeB,typeC);
+    }
+
+    function getTimeSlotPrice(uint _timeSlotID, bytes32 _productType) view public returns(uint) {
+        return typeSpecificTimeSlots[_productType][_timeSlotID].price;
+    }
+
     function getFreeSlots(bytes32 _productType) view public returns(uint[96]){
         uint[96] memory freeSlots;
         for(uint i=0; i<96; i++){
@@ -82,18 +94,6 @@ TBD:
             supplierToTimeSlotMapping[_deliverant].timeSlotAddresses.push(newAddressC);
         return newAddressC;
         }
-    }
-
-    function getProductGroups() view public returns(bytes32,bytes32,bytes32) {
-         return(typeA,typeB,typeC);
-    }
-
-    function setPrice(uint _timeSlotID, uint _price, bytes32 _productType) public {
-        typeSpecificTimeSlots[_productType][_timeSlotID].price = _price;
-    }
-
-    function getTimeSlotPrice(uint _timeSlotID, bytes32 _productType) view public returns(uint) {
-        return typeSpecificTimeSlots[_productType][_timeSlotID].price;
     }
 
     //add only supplier modifier
