@@ -5,7 +5,7 @@ contract TestSlotManager {
 /*
 TBD:
 
-- Supplier: get all my booked time slots
+- Supplier: get all my booked time slots ---> Only testing left
 - Supplier: pay for aquiring time slot
 - Modifier: Only TestSlotManager sets owner though aquireNewTimeSlotContract
 - aquire multiple slots at the same time
@@ -35,8 +35,13 @@ TBD:
         uint price;
     }
 
+    struct SupplierBookings {
+      address[] timeSlotAddresses;
+    }
+
     //Product Type => ( timeSlotContractIndex => TimeSlot "Object")
     mapping(bytes32 => mapping(uint => TimeSlot)) typeSpecificTimeSlots;
+    mapping (address => SupplierBookings) supplierToTimeSlotMapping;
 
     function getFreeSlots(bytes32 _productType) view public returns(uint[96]){
         uint[96] memory freeSlots;
@@ -57,18 +62,21 @@ TBD:
         typeAReservedTimeSlotContracts.push(newAddressA);
         typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
         typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
+        supplierToTimeSlotMapping[_deliverant].timeSlotAddresses.push(newAddressA);
         }
         if(_productType == typeB){
         address newAddressB = address(new TimeSlotContractTypeB(_deliverant,_date));
         typeBReservedTimeSlotContracts.push(newAddressB);
         typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
         typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
+        supplierToTimeSlotMapping[_deliverant].timeSlotAddresses.push(newAddressB);
         }
         if(_productType == typeC){
         address newAddressC = address(new TimeSlotContractTypeC(_deliverant,_date));
         typeCReservedTimeSlotContracts.push(newAddressC);
         typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
         typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
+        supplierToTimeSlotMapping[_deliverant].timeSlotAddresses.push(newAddressC);
         }
     }
 
@@ -82,6 +90,11 @@ TBD:
 
     function getTimeSlotPrice(uint _timeSlotID, bytes32 _productType) view public returns(uint) {
         return typeSpecificTimeSlots[_productType][_timeSlotID].price;
+    }
+
+    //add only supplier modifier
+    function getSupplierTimeslots() view public returns(address[]){
+      return supplierToTimeSlotMapping[msg.sender].timeSlotAddresses;
     }
 }
 
