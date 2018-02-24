@@ -5,7 +5,7 @@ contract TestSlotManager {
 /*
 TBD:
 
-- Supplier: get all my booked time slots ---> Only testing left
+- Supplier: get all my booked time slots
 - Supplier: pay for aquiring time slot
 - Modifier: Only TestSlotManager sets owner though aquireNewTimeSlotContract
 - aquire multiple slots at the same time
@@ -63,6 +63,7 @@ TBD:
         typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
         typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
         supplierToTimeSlotMapping[_deliverant].timeSlotAddresses.push(newAddressA);
+        return newAddressA;
         }
         if(_productType == typeB){
         address newAddressB = address(new TimeSlotContractTypeB(_deliverant,_date));
@@ -70,6 +71,7 @@ TBD:
         typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
         typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
         supplierToTimeSlotMapping[_deliverant].timeSlotAddresses.push(newAddressB);
+        return newAddressB;
         }
         if(_productType == typeC){
         address newAddressC = address(new TimeSlotContractTypeC(_deliverant,_date));
@@ -77,10 +79,11 @@ TBD:
         typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
         typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
         supplierToTimeSlotMapping[_deliverant].timeSlotAddresses.push(newAddressC);
+        return newAddressC;
         }
     }
 
-    function getProductGroupes() view public returns(bytes32,bytes32,bytes32) {
+    function getProductGroups() view public returns(bytes32,bytes32,bytes32) {
          return(typeA,typeB,typeC);
     }
 
