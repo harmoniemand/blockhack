@@ -1,0 +1,26 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" [routerLink]="['/warehouses']">{{ warehouse.name }}</li>
+    <li class="breadcrumb-item" [routerLink]="['/productgroups']">{{ productgroup.name }}</li>
+    <li class="breadcrumb-item active" aria-current="page">select time</li>
+  </ol>
+</nav>
+
+<div class="d-flex flex-column mt-4" style="height: calc(100vh - 130px);">
+
+  <div class="h-100 container" style="overflow: auto;">
+    <div class="row">
+
+      <ul class="list-group col">
+        <li class="list-group-item" *ngFor="let slot of slots" (click)="select(slot)" [ngClass]="{ 'bg-warning': slot.selected == 1, 'bg-info': slot.selected == 2 }">
+          <div>{{ slot.start | date : 'HH:mm' }}</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+
+  <div class="mt-5 mb-3">
+    <button type="button" class="btn btn-lg btn-block btn-outline-primary mt-3">Absenden</button>
+  </div>
+</div>

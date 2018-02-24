@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { WarehousesComponent } from './components/warehouses/warehouses.component';
 import { ProductgroupsComponent } from './components/productgroups/productgroups.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SlotsComponent } from './components/slots/slots.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     LoginComponent,
     WarehousesComponent,
     ProductgroupsComponent,
-    DashboardComponent
+    DashboardComponent,
+    SlotsComponent
   ],
   providers: [ ],
   bootstrap: [AppComponent]

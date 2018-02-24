@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-productgroups',
@@ -28,7 +29,12 @@ export class ProductgroupsComponent implements OnInit {
     },
   ];
 
-  constructor() { }
+  select(group: any) {
+    window.localStorage.setItem('productgroup', JSON.stringify(group));
+    this.router.navigate(['/slots']);
+  }
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.warehouse = JSON.parse(window.localStorage.getItem('warehouse'));
