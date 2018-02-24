@@ -4,17 +4,67 @@ var Web3 = require('web3');
 module.exports = function () {
     var that = this;
 
-    that.getProductGroupAbi = function () {
+    that.getTimeSlotManagerAbi = function () {
         var abi =
             [
                 {
                     "constant": true,
-                    "inputs": [],
-                    "name": "winningProposal",
+                    "inputs": [
+                        {
+                            "name": "_timeSlotID",
+                            "type": "uint256"
+                        },
+                        {
+                            "name": "_productType",
+                            "type": "bytes32"
+                        }
+                    ],
+                    "name": "getTimeSlotPrice",
                     "outputs": [
                         {
-                            "name": "_winningProposal",
-                            "type": "uint8"
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "payable": false,
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "constant": true,
+                    "inputs": [],
+                    "name": "getProductGroupes",
+                    "outputs": [
+                        {
+                            "name": "",
+                            "type": "bytes32"
+                        },
+                        {
+                            "name": "",
+                            "type": "bytes32"
+                        },
+                        {
+                            "name": "",
+                            "type": "bytes32"
+                        }
+                    ],
+                    "payable": false,
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "constant": true,
+                    "inputs": [
+                        {
+                            "name": "_productType",
+                            "type": "bytes32"
+                        }
+                    ],
+                    "name": "getFreeSlots",
+                    "outputs": [
+                        {
+                            "name": "",
+                            "type": "uint256[94]"
                         }
                     ],
                     "payable": false,
@@ -25,12 +75,25 @@ module.exports = function () {
                     "constant": false,
                     "inputs": [
                         {
-                            "name": "to",
+                            "name": "_productType",
+                            "type": "bytes32"
+                        },
+                        {
+                            "name": "_timeSlotID",
+                            "type": "uint256"
+                        },
+                        {
+                            "name": "_deliverant",
                             "type": "address"
                         }
                     ],
-                    "name": "delegate",
-                    "outputs": [],
+                    "name": "createNewTimeSlotContract",
+                    "outputs": [
+                        {
+                            "name": "",
+                            "type": "address"
+                        }
+                    ],
                     "payable": false,
                     "stateMutability": "nonpayable",
                     "type": "function"
@@ -39,37 +102,26 @@ module.exports = function () {
                     "constant": false,
                     "inputs": [
                         {
-                            "name": "toVoter",
-                            "type": "address"
+                            "name": "_timeSlotID",
+                            "type": "uint256"
+                        },
+                        {
+                            "name": "_price",
+                            "type": "uint256"
+                        },
+                        {
+                            "name": "_productType",
+                            "type": "bytes32"
                         }
                     ],
-                    "name": "giveRightToVote",
+                    "name": "setPrice",
                     "outputs": [],
                     "payable": false,
                     "stateMutability": "nonpayable",
                     "type": "function"
                 },
                 {
-                    "constant": false,
-                    "inputs": [
-                        {
-                            "name": "toProposal",
-                            "type": "uint8"
-                        }
-                    ],
-                    "name": "vote",
-                    "outputs": [],
-                    "payable": false,
-                    "stateMutability": "nonpayable",
-                    "type": "function"
-                },
-                {
-                    "inputs": [
-                        {
-                            "name": "_numProposals",
-                            "type": "uint8"
-                        }
-                    ],
+                    "inputs": [],
                     "payable": false,
                     "stateMutability": "nonpayable",
                     "type": "constructor"
@@ -77,6 +129,8 @@ module.exports = function () {
             ];
         return abi;
     };
+
+    
     that.findContracts = function () {
 
         var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
