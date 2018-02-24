@@ -11,8 +11,7 @@ TBD:
 - aquire multiple slots at the same time
 
 */
-
-
+    modifier isEmpty
     address private owner;
 
     function TestSlotManager() public{
@@ -57,28 +56,31 @@ TBD:
     }
 
     function aquireNewTimeSlotContract(bytes32 _productType, uint _timeSlotID, address _deliverant, bytes32 _date) public returns(address) {
-        if(_productType == typeA){
-        address newAddressA = address(new TimeSlotContractTypeA(_deliverant,_date));
-        typeAReservedTimeSlotContracts.push(newAddressA);
-        typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
-        typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
-        supplierToTimeSlotMapping[_deliverant].timeSlotAddresses.push(newAddressA);
+        if(_productType == typeA) {
+            uint timeA = 15*_timeSlotID;
+            address newAddressA = address(new TimeSlotContractTypeA(_deliverant,_date,timeA));
+            typeAReservedTimeSlotContracts.push(newAddressA);
+            typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
+            typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
+            supplierToTimeSlotMapping[_deliverant].timeSlotAddresses.push(newAddressA);
         return newAddressA;
         }
         if(_productType == typeB){
-        address newAddressB = address(new TimeSlotContractTypeB(_deliverant,_date));
-        typeBReservedTimeSlotContracts.push(newAddressB);
-        typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
-        typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
-        supplierToTimeSlotMapping[_deliverant].timeSlotAddresses.push(newAddressB);
+            uint timeB = 15*_timeSlotID;
+            address newAddressB = address(new TimeSlotContractTypeB(_deliverant,_date,timeB));
+            typeBReservedTimeSlotContracts.push(newAddressB);
+            typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
+            typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
+            supplierToTimeSlotMapping[_deliverant].timeSlotAddresses.push(newAddressB);
         return newAddressB;
         }
         if(_productType == typeC){
-        address newAddressC = address(new TimeSlotContractTypeC(_deliverant,_date));
-        typeCReservedTimeSlotContracts.push(newAddressC);
-        typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
-        typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
-        supplierToTimeSlotMapping[_deliverant].timeSlotAddresses.push(newAddressC);
+            uint timeC = 15*_timeSlotID;
+            address newAddressC = address(new TimeSlotContractTypeC(_deliverant,_date,timeC));
+            typeCReservedTimeSlotContracts.push(newAddressC);
+            typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
+            typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
+            supplierToTimeSlotMapping[_deliverant].timeSlotAddresses.push(newAddressC);
         return newAddressC;
         }
     }
@@ -104,41 +106,71 @@ TBD:
 contract TimeSlotContractTypeA {
     address owner;
     bytes32 date;
+    uint time;
     //add only SlotManager modifier
-    function TimeSlotContractTypeA(address _deliverant, bytes32 _date) public {
+    function TimeSlotContractTypeA(address _deliverant, bytes32 _date, uint _time) public {
         owner = _deliverant;
         date = _date;
+        time = _time;
     }
     //add onlyOwner modifier
     function changeOwnership(address _newOwner) {
       owner = _newOwner;
+    }
+
+    function getCurrentOwner() view returns(address) {
+        return owner;
+    }
+
+    function getDate() view returns(bytes32) {
+        return date;
     }
 }
 
 contract TimeSlotContractTypeB {
     address owner;
     bytes32 date;
+    uint time;
     //add only SlotManager modifier
-    function TimeSlotContractTypeB(address _deliverant, bytes32 _date) public {
+    function TimeSlotContractTypeB(address _deliverant, bytes32 _date, uint _time) public {
         owner = _deliverant;
         date = _date;
+        time = _time;
     }
     //add onlyOwner modifier
     function changeOwnership(address _newOwner) {
       owner = _newOwner;
+    }
+
+    function getCurrentOwner() view returns(address) {
+        return owner;
+    }
+
+    function getDate() view returns(bytes32) {
+        return date;
     }
 }
 
 contract TimeSlotContractTypeC {
     address owner;
     bytes32 date;
+    uint time;
     //add only SlotManager modifier
-    function TimeSlotContractTypeC(address _deliverant, bytes32 _date) public {
+    function TimeSlotContractTypeC(address _deliverant, bytes32 _date, uint _time) public {
         owner = _deliverant;
         date = _date;
+        time = _time;
     }
     //add onlyOwner modifier
     function changeOwnership(address _newOwner) {
       owner = _newOwner;
+    }
+
+    function getCurrentOwner() view returns(address) {
+        return owner;
+    }
+
+    function getDate() view returns(bytes32) {
+        return date;
     }
 }
