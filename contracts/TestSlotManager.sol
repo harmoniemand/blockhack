@@ -11,7 +11,6 @@ TBD:
 - aquire multiple slots at the same time
 
 */
-    modifier isEmpty
     address private owner;
 
     function TestSlotManager() public{
@@ -122,8 +121,8 @@ contract TimeSlotContractTypeA {
         return owner;
     }
 
-    function getDate() view returns(bytes32) {
-        return date;
+    function getDateAndTime() view returns(bytes32,uint) {
+        return (date,time);
     }
 }
 
@@ -146,8 +145,8 @@ contract TimeSlotContractTypeB {
         return owner;
     }
 
-    function getDate() view returns(bytes32) {
-        return date;
+    function getDateAndTime() view returns(bytes32,uint) {
+        return (date,time);
     }
 }
 
@@ -170,7 +169,7 @@ contract TimeSlotContractTypeC {
         return owner;
     }
 
-    function getDate() view returns(bytes32) {
-        return date;
+    function getDateAndTime() view returns(bytes32,uint) {
+        return (date,time);
     }
 }
