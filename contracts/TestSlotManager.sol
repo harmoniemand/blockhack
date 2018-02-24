@@ -53,9 +53,9 @@ TBD:
         return typeSpecificTimeSlots[_productType][_timeSlotID].price;
     }
 
-    function getFreeSlots(bytes32 _productType) view public returns(uint[96]){
-        uint[96] memory freeSlots;
-        for(uint i=0; i<96; i++){
+    function getFreeSlots(bytes32 _productType) view public returns(uint[10]){
+        uint[10] memory freeSlots;
+        for(uint i=0; i<10; i++){
             if(typeSpecificTimeSlots[_productType][i].reserved == false){
                 freeSlots[i]=0;
             }
@@ -66,7 +66,13 @@ TBD:
         return freeSlots;
     }
 
-    function aquireNewTimeSlotContract(bytes32 _productType, uint _timeSlotID, address _deliverant, bytes32 _date) public returns(address) {
+    //add modifier for
+    function aquireNewTimeSlotContract(bytes32 _productType, uint _timeSlotID, address _deliverant, bytes32 _date) public payable returns(address) {
+        uint price = getTimeSlotPrice(_timeSlotID, _productType);
+            if(msg.value <= price) {
+            if(!owner.send(msg.value)) {
+            revert();
+            }
         if(_productType == typeA) {
             uint timeA = 15*_timeSlotID;
             address newAddressA = address(new TimeSlotContractTypeA(_deliverant,_date,timeA));
@@ -74,16 +80,18 @@ TBD:
             typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
             typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
             supplierToTimeSlotMapping[_deliverant].timeSlotAddresses.push(newAddressA);
-        return newAddressA;
+            return newAddressA;
+            }
         }
         if(_productType == typeB){
+
             uint timeB = 15*_timeSlotID;
             address newAddressB = address(new TimeSlotContractTypeB(_deliverant,_date,timeB));
             typeBReservedTimeSlotContracts.push(newAddressB);
             typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
             typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
             supplierToTimeSlotMapping[_deliverant].timeSlotAddresses.push(newAddressB);
-        return newAddressB;
+            return newAddressB;
         }
         if(_productType == typeC){
             uint timeC = 15*_timeSlotID;
@@ -92,7 +100,7 @@ TBD:
             typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
             typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
             supplierToTimeSlotMapping[_deliverant].timeSlotAddresses.push(newAddressC);
-        return newAddressC;
+            return newAddressC;
         }
     }
 
