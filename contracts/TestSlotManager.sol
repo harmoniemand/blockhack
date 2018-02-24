@@ -11,6 +11,7 @@ TBD:
 - aquire multiple slots at the same time
 
 */
+    //the owner of the contract
     address private owner;
 
     function TestSlotManager() public{
@@ -22,6 +23,7 @@ TBD:
     bytes32 typeB = "typeB";
     bytes32 typeC = "typeC";
 
+    // experimental
     // addresses of reserved Timeslot contracts
     address[] typeAReservedTimeSlotContracts;
     address[] typeBReservedTimeSlotContracts;
@@ -35,6 +37,12 @@ TBD:
 
     struct SupplierBookings {
       address[] timeSlotAddresses;
+    }
+
+    modifier onlyBy(address _account)
+    {
+        require(msg.sender == _account);
+        _;
     }
 
     //Product Type => ( timeSlotContractIndex => TimeSlot "Object")
@@ -67,9 +75,10 @@ TBD:
     }
 
     //add modifier for
-    function aquireNewTimeSlotContract(bytes32 _productType, uint _timeSlotID, address _deliverant, bytes32 _date) public payable returns(address) {
+    function aquireNewTimeSlotContract(bytes32 _productType, uint _timeSlotID, address _deliverant, bytes32 _date) public payable onlyBy(owner) returns(address) {
         uint price = getTimeSlotPrice(_timeSlotID, _productType);
-            if(msg.value <= price) {
+        if(!typeSpecificTimeSlots[_productType][_timeSlotID].reserved == false){revert();}
+        if(msg.value <= price) {
             if(!owner.send(msg.value)) {
             revert();
             }
@@ -121,15 +130,15 @@ contract TimeSlotContractTypeA {
         time = _time;
     }
     //add onlyOwner modifier
-    function changeOwnership(address _newOwner) {
+    function changeOwnership(address _newOwner) public {
       owner = _newOwner;
     }
 
-    function getCurrentOwner() view returns(address) {
+    function getCurrentOwner() view public returns(address) {
         return owner;
     }
 
-    function getDateAndTime() view returns(bytes32,uint) {
+    function getDateAndTime() view public returns(bytes32,uint) {
         return (date,time);
     }
 }
@@ -145,15 +154,15 @@ contract TimeSlotContractTypeB {
         time = _time;
     }
     //add onlyOwner modifier
-    function changeOwnership(address _newOwner) {
+    function changeOwnership(address _newOwner) public {
       owner = _newOwner;
     }
 
-    function getCurrentOwner() view returns(address) {
+    function getCurrentOwner() view public returns(address) {
         return owner;
     }
 
-    function getDateAndTime() view returns(bytes32,uint) {
+    function getDateAndTime() view public returns(bytes32,uint) {
         return (date,time);
     }
 }
@@ -169,15 +178,15 @@ contract TimeSlotContractTypeC {
         time = _time;
     }
     //add onlyOwner modifier
-    function changeOwnership(address _newOwner) {
+    function changeOwnership(address _newOwner) public {
       owner = _newOwner;
     }
 
-    function getCurrentOwner() view returns(address) {
+    function getCurrentOwner() view public returns(address) {
         return owner;
     }
 
-    function getDateAndTime() view returns(bytes32,uint) {
+    function getDateAndTime() view public returns(bytes32,uint) {
         return (date,time);
     }
 }
