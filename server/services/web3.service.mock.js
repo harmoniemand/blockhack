@@ -24,23 +24,27 @@ module.exports = function () {
     };
 
     that.getOpenSlots = function (pg, wareHouse) {
+        return new Promise((resolve, reject) => {
+
+            var slots = [];
+
+            for (var i = 0; i < 96; i++) {
+                slots.push(Math.floor((Math.random() * 10) + 1) % 2);
+            }
+            
+            resolve(slots);
+        });
     };
 
     that.getProductGroups = function (wareHouse) {
         return new Promise((resolve, reject) => {
-
-            var myContract = new web3.eth.Contract(abis.getTimeSlotManagerAbi(), wareHouse);
-
-            myContract.methods.getProductGroups().call().then(function (val) {
-                Object.keys(val).forEach(element => {
-                    val[element] = web3.utils.hexToUtf8(val[element]);
-                });
-                resolve(val);
+            resolve({
+                0: 'Type A',
+                1: 'Type B',
+                2: 'Type C',
             });
         });
     };
-
-
 
     that.acquireSlots = function (slots, date, pg, wareHouse) {
         return new Promise((resolve, reject) => {

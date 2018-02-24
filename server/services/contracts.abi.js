@@ -6,127 +6,146 @@ module.exports = function () {
 
     that.getTimeSlotManagerAbi = function () {
         var abi =
-            [
-                {
-                    "constant": true,
-                    "inputs": [
-                        {
-                            "name": "_timeSlotID",
-                            "type": "uint256"
-                        },
-                        {
-                            "name": "_productType",
-                            "type": "bytes32"
-                        }
-                    ],
-                    "name": "getTimeSlotPrice",
-                    "outputs": [
-                        {
-                            "name": "",
-                            "type": "uint256"
-                        }
-                    ],
-                    "payable": false,
-                    "stateMutability": "view",
-                    "type": "function"
-                },
-                {
-                    "constant": true,
-                    "inputs": [],
-                    "name": "getProductGroupes",
-                    "outputs": [
-                        {
-                            "name": "",
-                            "type": "bytes32"
-                        },
-                        {
-                            "name": "",
-                            "type": "bytes32"
-                        },
-                        {
-                            "name": "",
-                            "type": "bytes32"
-                        }
-                    ],
-                    "payable": false,
-                    "stateMutability": "view",
-                    "type": "function"
-                },
-                {
-                    "constant": true,
-                    "inputs": [
-                        {
-                            "name": "_productType",
-                            "type": "bytes32"
-                        }
-                    ],
-                    "name": "getFreeSlots",
-                    "outputs": [
-                        {
-                            "name": "",
-                            "type": "uint256[94]"
-                        }
-                    ],
-                    "payable": false,
-                    "stateMutability": "view",
-                    "type": "function"
-                },
-                {
-                    "constant": false,
-                    "inputs": [
-                        {
-                            "name": "_productType",
-                            "type": "bytes32"
-                        },
-                        {
-                            "name": "_timeSlotID",
-                            "type": "uint256"
-                        },
-                        {
-                            "name": "_deliverant",
-                            "type": "address"
-                        }
-                    ],
-                    "name": "createNewTimeSlotContract",
-                    "outputs": [
-                        {
-                            "name": "",
-                            "type": "address"
-                        }
-                    ],
-                    "payable": false,
-                    "stateMutability": "nonpayable",
-                    "type": "function"
-                },
-                {
-                    "constant": false,
-                    "inputs": [
-                        {
-                            "name": "_timeSlotID",
-                            "type": "uint256"
-                        },
-                        {
-                            "name": "_price",
-                            "type": "uint256"
-                        },
-                        {
-                            "name": "_productType",
-                            "type": "bytes32"
-                        }
-                    ],
-                    "name": "setPrice",
-                    "outputs": [],
-                    "payable": false,
-                    "stateMutability": "nonpayable",
-                    "type": "function"
-                },
-                {
-                    "inputs": [],
-                    "payable": false,
-                    "stateMutability": "nonpayable",
-                    "type": "constructor"
-                }
-            ];
+        [
+            {
+                "constant": true,
+                "inputs": [
+                    {
+                        "name": "_timeSlotID",
+                        "type": "uint256"
+                    },
+                    {
+                        "name": "_productType",
+                        "type": "bytes32"
+                    }
+                ],
+                "name": "getTimeSlotPrice",
+                "outputs": [
+                    {
+                        "name": "",
+                        "type": "uint256"
+                    }
+                ],
+                "payable": false,
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "constant": true,
+                "inputs": [],
+                "name": "getSupplierTimeslots",
+                "outputs": [
+                    {
+                        "name": "",
+                        "type": "address[]"
+                    }
+                ],
+                "payable": false,
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "constant": true,
+                "inputs": [],
+                "name": "getProductGroups",
+                "outputs": [
+                    {
+                        "name": "",
+                        "type": "bytes32"
+                    },
+                    {
+                        "name": "",
+                        "type": "bytes32"
+                    },
+                    {
+                        "name": "",
+                        "type": "bytes32"
+                    }
+                ],
+                "payable": false,
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "constant": true,
+                "inputs": [
+                    {
+                        "name": "_productType",
+                        "type": "bytes32"
+                    }
+                ],
+                "name": "getFreeSlots",
+                "outputs": [
+                    {
+                        "name": "",
+                        "type": "uint256[96]"
+                    }
+                ],
+                "payable": false,
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "constant": false,
+                "inputs": [
+                    {
+                        "name": "_productType",
+                        "type": "bytes32"
+                    },
+                    {
+                        "name": "_timeSlotID",
+                        "type": "uint256"
+                    },
+                    {
+                        "name": "_deliverant",
+                        "type": "address"
+                    },
+                    {
+                        "name": "_date",
+                        "type": "bytes32"
+                    }
+                ],
+                "name": "aquireNewTimeSlotContract",
+                "outputs": [
+                    {
+                        "name": "",
+                        "type": "address"
+                    }
+                ],
+                "payable": false,
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "constant": false,
+                "inputs": [
+                    {
+                        "name": "_timeSlotID",
+                        "type": "uint256"
+                    },
+                    {
+                        "name": "_price",
+                        "type": "uint256"
+                    },
+                    {
+                        "name": "_productType",
+                        "type": "bytes32"
+                    }
+                ],
+                "name": "setPrice",
+                "outputs": [],
+                "payable": false,
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "payable": false,
+                "stateMutability": "nonpayable",
+                "type": "constructor"
+            }
+        ]
+
         return abi;
     };
 
