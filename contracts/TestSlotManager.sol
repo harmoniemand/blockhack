@@ -1,4 +1,4 @@
-pragma solidity ^0.4.16;
+pragma solidity ^0.4.6;
 
 contract TestSlotManager {
 
@@ -18,6 +18,8 @@ TBD:
         owner = msg.sender;
     }
 
+
+
     //Bays / ProductTypes
     bytes32 typeA = "typeA";
     bytes32 typeB = "typeB";
@@ -25,9 +27,10 @@ TBD:
 
     // experimental
     // addresses of reserved Timeslot contracts
+    /*
     address[] typeAReservedTimeSlotContracts;
     address[] typeBReservedTimeSlotContracts;
-    address[] typeCReservedTimeSlotContracts;
+    address[] typeCReservedTimeSlotContracts; */
 
     struct TimeSlot {
         bool reserved;
@@ -39,31 +42,37 @@ TBD:
       address[] timeSlotAddresses;
     }
 
+
     modifier onlyBy(address _account)
     {
         require(msg.sender == _account);
         _;
     }
 
+
     //Product Type => ( timeSlotContractIndex => TimeSlot "Object")
     mapping(bytes32 => mapping(uint => TimeSlot)) typeSpecificTimeSlots;
     mapping (address => SupplierBookings) supplierToTimeSlotMapping;
+
 
     function setPrice(uint _timeSlotID, uint _price, bytes32 _productType) public {
         typeSpecificTimeSlots[_productType][_timeSlotID].price = _price;
     }
 
+
     function getProductGroups() view public returns(bytes32,bytes32,bytes32) {
          return(typeA,typeB,typeC);
     }
+
 
     function getTimeSlotPrice(uint _timeSlotID, bytes32 _productType) view public returns(uint) {
         return typeSpecificTimeSlots[_productType][_timeSlotID].price;
     }
 
-    function getFreeSlots(bytes32 _productType) view public returns(uint[10]){
-        uint[10] memory freeSlots;
-        for(uint i=0; i<10; i++){
+
+    function getFreeSlots(bytes32 _productType) view public returns(uint[96]){
+        uint[96] memory freeSlots;
+        for(uint i=0; i<96; i++){
             if(typeSpecificTimeSlots[_productType][i].reserved == false){
                 freeSlots[i]=0;
             }
@@ -73,6 +82,7 @@ TBD:
         }
         return freeSlots;
     }
+
 
     //add modifier for
     function aquireNewTimeSlotContract(bytes32 _productType, uint _timeSlotID, address _deliverant, bytes32 _date) public payable onlyBy(owner) returns(address) {
@@ -85,7 +95,7 @@ TBD:
         if(_productType == typeA) {
             uint timeA = 15*_timeSlotID;
             address newAddressA = address(new TimeSlotContractTypeA(_deliverant,_date,timeA));
-            typeAReservedTimeSlotContracts.push(newAddressA);
+        //    typeAReservedTimeSlotContracts.push(newAddressA);
             typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
             typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
             supplierToTimeSlotMapping[_deliverant].timeSlotAddresses.push(newAddressA);
@@ -96,7 +106,7 @@ TBD:
 
             uint timeB = 15*_timeSlotID;
             address newAddressB = address(new TimeSlotContractTypeB(_deliverant,_date,timeB));
-            typeBReservedTimeSlotContracts.push(newAddressB);
+      //      typeBReservedTimeSlotContracts.push(newAddressB);
             typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
             typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
             supplierToTimeSlotMapping[_deliverant].timeSlotAddresses.push(newAddressB);
@@ -105,7 +115,7 @@ TBD:
         if(_productType == typeC){
             uint timeC = 15*_timeSlotID;
             address newAddressC = address(new TimeSlotContractTypeC(_deliverant,_date,timeC));
-            typeCReservedTimeSlotContracts.push(newAddressC);
+      //      typeCReservedTimeSlotContracts.push(newAddressC);
             typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
             typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
             supplierToTimeSlotMapping[_deliverant].timeSlotAddresses.push(newAddressC);
@@ -113,10 +123,13 @@ TBD:
         }
     }
 
+
+
     //add only supplier modifier
     function getSupplierTimeslots() view public returns(address[]){
       return supplierToTimeSlotMapping[msg.sender].timeSlotAddresses;
     }
+
 }
 
 contract TimeSlotContractTypeA {
