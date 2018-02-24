@@ -39,21 +39,21 @@ contract TestSlotManager {
         return freeSlots;
     }
 
-    function createNewTimeSlotContract(bytes32 _productType, uint _timeSlotID, address _deliverant) public returns(address) {
+    function aquireNewTimeSlotContract(bytes32 _productType, uint _timeSlotID, address _deliverant, bytes32 _date) public returns(address) {
         if(_productType == typeA){
-        address newAddressA = address(new TimeSlotContractTypeA(_deliverant));
+        address newAddressA = address(new TimeSlotContractTypeA(_deliverant,_date));
         typeAReservedTimeSlotContracts.push(newAddressA);
         typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
         typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
         }
         if(_productType == typeB){
-        address newAddressB = address(new TimeSlotContractTypeB(_deliverant));
+        address newAddressB = address(new TimeSlotContractTypeB(_deliverant,_date));
         typeBReservedTimeSlotContracts.push(newAddressB);
         typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
         typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
         }
         if(_productType == typeC){
-        address newAddressC = address(new TimeSlotContractTypeC(_deliverant));
+        address newAddressC = address(new TimeSlotContractTypeC(_deliverant,_date));
         typeCReservedTimeSlotContracts.push(newAddressC);
         typeSpecificTimeSlots[_productType][_timeSlotID].reserved = true;
         typeSpecificTimeSlots[_productType][_timeSlotID].owner = _deliverant;
@@ -75,24 +75,42 @@ contract TestSlotManager {
 
 contract TimeSlotContractTypeA {
     address owner;
+    bytes32 date;
     //add only SlotManager modifier
-    function TimeSlotContractTypeA(address _deliverant) public {
+    function TimeSlotContractTypeA(address _deliverant, bytes32 _date) public {
         owner = _deliverant;
+        date = _date;
+    }
+    //add onlyOwner modifier
+    function changeOwnership(address _newOwner) {
+      owner = _newOwner;
     }
 }
 
 contract TimeSlotContractTypeB {
     address owner;
+    bytes32 date;
     //add only SlotManager modifier
-    function TimeSlotContractTypeB(address _deliverant) public {
+    function TimeSlotContractTypeB(address _deliverant, bytes32 _date) public {
         owner = _deliverant;
+        date = _date;
+    }
+    //add onlyOwner modifier
+    function changeOwnership(address _newOwner) {
+      owner = _newOwner;
     }
 }
 
 contract TimeSlotContractTypeC {
     address owner;
+    bytes32 date;
     //add only SlotManager modifier
-    function TimeSlotContractTypeC(address _deliverant) public {
+    function TimeSlotContractTypeC(address _deliverant, bytes32 _date) public {
         owner = _deliverant;
+        date = _date;
+    }
+    //add onlyOwner modifier
+    function changeOwnership(address _newOwner) {
+      owner = _newOwner;
     }
 }
