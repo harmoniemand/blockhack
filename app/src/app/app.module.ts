@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login/login.component';
 import { WarehousesComponent } from './components/warehouses/warehouses.component';
+import { ProductgroupsComponent } from './components/productgroups/productgroups.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   imports: [
@@ -22,7 +24,9 @@ import { WarehousesComponent } from './components/warehouses/warehouses.componen
     AppComponent,
     HeaderComponent,
     LoginComponent,
-    WarehousesComponent
+    WarehousesComponent,
+    ProductgroupsComponent,
+    DashboardComponent
   ],
   providers: [ ],
   bootstrap: [AppComponent]

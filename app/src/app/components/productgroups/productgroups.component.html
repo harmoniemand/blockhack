@@ -1,0 +1,21 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" [routerLink]="['/warehouses']">{{ warehouse.name }}</li>
+    <li class="breadcrumb-item active" aria-current="page">select productgroup</li>
+  </ol>
+</nav>
+
+<div class="d-flex flex-column mt-4" style="height: calc(100vh - 130px);">
+
+  <div class="h-100 container" style="overflow: auto;">
+    <div class="row">
+
+      <ul class="list-group col">
+        <li class="list-group-item" *ngFor="let group of productgroups" (click)="select(group)">
+          <div>{{ group.name }}</div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-dark navbar-expand-lg bg-dark border border-info border-top-0 border-left-0 border-right-0 ">
-    <a class="navbar-brand" href="#">BlockHack</a>
+    <a class="navbar-brand" [routerLink]="['/dashboard']">BlockHack</a>
     <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" (click)="showNavigationOnSmall = !showNavigationOnSmall">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -7,7 +7,7 @@
     <div class="navbar-collapse d-none d-md-block" [ngClass]="{ 'd-none': !showNavigationOnSmall }" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/i/create']">new shipping</a>
+          <a class="nav-link" [routerLink]="['/warehouses']">new shipping</a>
         </li>
       </ul>
 

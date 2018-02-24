@@ -12,6 +12,11 @@ app.get('/productgroups', function (req, res) {
     res.json(s3.getProductGroups());
 });
 
+app.get('/warehouses', function (req, res) {
+    var s3 = new w3service();
+    res.json(s3.getProductGroups());
+});
+
 
 var port = process.env.PORT || 8080;
 var http = require('http').Server(app);

@@ -1,35 +1,19 @@
-<div class="d-flex flex-column mt-4" style="height: calc(100vh - 57px);">
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">select warehouse</li>
+  </ol>
+</nav>
+
+<div class="d-flex flex-column mt-4" style="height: calc(100vh - 130px);">
 
   <div class="h-100 container" style="overflow: auto;">
     <div class="row">
 
       <ul class="list-group col">
-        <li class="list-group-item">
-          <div>Kaufland Logistik Geisenfeld</div>
+        <li class="list-group-item" *ngFor="let warehouse of warehouses" (click)="select(warehouse)">
+          <div>{{ warehouse.name }}</div>
           <div>
-
-            <small class="ml-auto">Keltenstraße 3, 85290 Geisenfeld</small>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div>Kaufland Logistik Geisenfeld</div>
-          <div>
-
-            <small class="ml-auto">Keltenstraße 3, 85290 Geisenfeld</small>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div>Kaufland Logistik Geisenfeld</div>
-          <div>
-
-            <small class="ml-auto">Keltenstraße 3, 85290 Geisenfeld</small>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div>Kaufland Logistik Geisenfeld</div>
-          <div>
-
-            <small class="ml-auto">Keltenstraße 3, 85290 Geisenfeld</small>
+            <small class="ml-auto">{{ warehouse.postAddress }}</small>
           </div>
         </li>
       </ul>
@@ -37,6 +21,5 @@
     </div>
   </div>
 
-  <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d144585.8270206351!2d9.233924820282862!3d49.141361916944284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1skaufland+lager!5e0!3m2!1sen!2sde!4v1519435573717"
-    frameborder="0" style="border:0" allowfullscreen class="h-100"></iframe>
+  <iframe src="https://www.google.com/maps/d/embed?mid=1pr8A9chVAvxhTk1VrUJFe9GIifEhhFjd" class="h-100"></iframe>
 </div>
