@@ -9,12 +9,14 @@ import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ShippingComponent } from './components/shipping/shipping.component';
 import { CreateComponent } from './components/create/create.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
+    HttpClientModule,
 
     InternRoutingModule,
     CoreModule

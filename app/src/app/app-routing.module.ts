@@ -1,20 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from './components/login/login.component';
+import { WarehousesComponent } from './components/warehouses/warehouses.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/i',
+    redirectTo: '/login',
     pathMatch: 'full',
   },
   {
-    path: 'public',
-    loadChildren: './modules/public/public.module#PublicModule'
+    path: 'login',
+    component: LoginComponent
   },
   {
-    path: 'i',
-    loadChildren: './modules/intern/intern.module#InternModule'
-  },
+    path: 'warehouses',
+    component: WarehousesComponent
+  }
 ];
 
 @NgModule({

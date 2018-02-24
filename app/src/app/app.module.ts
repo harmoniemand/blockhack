@@ -6,6 +6,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './components/header/header.component';
+import { LoginComponent } from './components/login/login.component';
+import { WarehousesComponent } from './components/warehouses/warehouses.component';
 
 @NgModule({
   imports: [
@@ -17,6 +20,9 @@ import { AppComponent } from './app.component';
   ],
   declarations: [
     AppComponent,
+    HeaderComponent,
+    LoginComponent,
+    WarehousesComponent
   ],
   providers: [ ],
   bootstrap: [AppComponent]
