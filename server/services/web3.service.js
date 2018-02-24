@@ -32,9 +32,8 @@ module.exports = function () {
             var myContract = new web3.eth.Contract(abis.getTimeSlotManagerAbi(), wareHouse);
 
             myContract.methods.getProductGroups().call().then(function (val) {
-                ret = val;
                 Object.keys(val).forEach(element => {
-                    val[element] = web3.utils.hexToAscii(val[element]);
+                    val[element] = web3.utils.hexToUtf8(val[element]);
                 });
                 resolve(val);
             });
@@ -47,7 +46,6 @@ module.exports = function () {
         return new Promise((resolve, reject) => {
 
             var myContract = new web3.eth.Contract(abis.getTimeSlotManagerAbi(), wareHouse);
-            return true;
             resolve(true);
         });
     }
