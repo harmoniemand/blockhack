@@ -54,6 +54,8 @@ TBD:
     mapping(bytes32 => mapping(uint => TimeSlot)) typeSpecificTimeSlots;
     mapping (address => SupplierBookings) supplierToTimeSlotMapping;
 
+    // all slots of a day
+    mapping (bytes32 => uint[96]) daySlots;
 
     function setPrice(uint _timeSlotID, uint _price, bytes32 _productType) public {
         typeSpecificTimeSlots[_productType][_timeSlotID].price = _price;
@@ -69,8 +71,7 @@ TBD:
         return typeSpecificTimeSlots[_productType][_timeSlotID].price;
     }
 
-
-    function getFreeSlots(bytes32 _productType) view public returns(uint[96]){
+    function getFreeSlots(bytes32 _productType, bytes32 _date) view public returns(uint[96]){
         uint[96] memory freeSlots;
         for(uint i=0; i<96; i++){
             if(typeSpecificTimeSlots[_productType][i].reserved == false){
@@ -83,8 +84,6 @@ TBD:
         return freeSlots;
     }
 
-
-    //add modifier for
     function aquireNewTimeSlotContract(bytes32 _productType, uint _timeSlotID, address _deliverant, bytes32 _date) public payable onlyBy(owner) returns(address) {
         uint price = getTimeSlotPrice(_timeSlotID, _productType);
         if(!typeSpecificTimeSlots[_productType][_timeSlotID].reserved == false){revert();}
