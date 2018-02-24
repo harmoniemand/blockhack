@@ -5,12 +5,8 @@
 
 export const environment = {
   production: false,
-  firebase: {
-    apiKey: "AIzaSyClAuOLdUosDSNIoAsC8PPG3oHx38qKGkw",
-    authDomain: "imfuc-app.firebaseapp.com",
-    databaseURL: "https://imfuc-app.firebaseio.com",
-    projectId: "imfuc-app",
-    storageBucket: "imfuc-app.appspot.com",
-    messagingSenderId: "877819327892"
+  endpoint: {
+    productgroups: "http://localhost:8080/productgroups",
+      // 'http://bh.hmnd.de/api/productgroups'
   }
 };

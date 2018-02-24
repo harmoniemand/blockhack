@@ -3,20 +3,18 @@ var express = require('express');
 var app = express();
 var w3service = require("./services/web3.service");
 
+var cors = require('cors')
 
-app.get('/states', function (req, res) {
+app.use(cors());
 
-    // Aktuellen User ermitteln (aus Authentication Header)
-
-    // web3 starten
-
-    // connection zu geth herstellen
-
-    // web3 account des users verwenden
-
-    // smart contract ausführen
+app.get('/productgroups', function (req, res) {
     var s3 = new w3service();
-    res.json(s3.getOpenSlots());
+    res.json(s3.getProductGroups());
+});
+
+app.get('/warehouses', function (req, res) {
+    var s3 = new w3service();
+    res.json(s3.getProductGroups());
 });
 
 
