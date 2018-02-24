@@ -24,6 +24,8 @@ module.exports = function () {
     }
 
     that.getProductGroups = function (wareHouse) {
+        return new Promise((resolve, reject)=>{
+
         var myContract = new web3.eth.Contract(abis.getTimeSlotManagerAbi(), wareHouse);
 
         myContract.methods.getProductGroupes().call().then(function (val) {
@@ -31,9 +33,10 @@ module.exports = function () {
             Object.keys(val).forEach(element => {
                 val[element] = web3.utils.hexToAscii(val[element]);
             });
-            return val;
+            resolve(val);
         });
-    }
+    })
+}
 
     that.acquireSlots = function (slots, date, pg, wareHouse) {
         var myContract = new web3.eth.Contract(abis.getTimeSlotManagerAbi(), wareHouse);
