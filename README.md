@@ -1,12 +1,15 @@
-##Verzeichnis Contracts:
-##Nummer 1:
+# Verzeichnis Contracts:
+
+## Nummer 1:
+
 Addresse:
 0x87e45f56dd4fa459562ae5831b4a6f2673cc660f
 
 Daten:
 10 Timeslot-Abschnitte
 
-##Nummer 2:
+## Nummer 2:
+
 Addresse:
 0xede7e1368978b49215911bdb89203bb563fffdc3
 
@@ -15,7 +18,8 @@ Daten:
 Supplier: 0xccf223c4d32013e058ad45a03447f5b4b51186c6, bookedTimeSlots: 0x9f1a95f10025a0b350a4558403ba1c4a542c788e
 getFreeSlots("typeA"): uint[96]: index:0 => 00:00 booked
 
-##Nummer 3:
+## Nummer 3:
+
 Addresse:
 0x81be5f1f599e4e557eff6cf89b2cd8185c15f372
 
