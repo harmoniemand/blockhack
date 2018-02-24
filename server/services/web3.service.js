@@ -11,32 +11,16 @@ module.exports = function () {
     var that = this;
 
     that.getWarehouses() = function() {
-        var wareHouses = {
-            "employees":[
-                {"Name":"Warehouse 1", "address":'0x89925ce49720c48cf5ece45d3dd1494699257573'}, 
-                {"Name":"Warehouse 2", "address":'0xe628ed5cd11cd9c42b7ee0286d91be1f310fbd77'}, 
-                {"Name":"Warehouse 3", "address":'0x29391653db57c32e9aad9c13a28cd70da602004b'}, 
-                {"Name":"Warehouse 4", "address":'0xd23eb787686b0a6769eef34c38bd54fd91a21b36'}, 
+        var wareHouses = [
+                {'Name':'Möckmühl', 'address':'0x89925ce49720c48cf5ece45d3dd1494699257573'}, 
+                {'Name':'Osterfeld', 'address':'0xe628ed5cd11cd9c42b7ee0286d91be1f310fbd77'}, 
+                {'Name':'Lübbenau', 'address':'0x29391653db57c32e9aad9c13a28cd70da602004b'}, 
+                {'Name':'Dortmund', 'address':'0xd23eb787686b0a6769eef34c38bd54fd91a21b36'}, 
             ]
-            }
-        return [,
-                '',
-                '',
-                '']
+        return wareHouses
     }
 
     that.getOpenSlots = function (pg, wareHouse) {
-
-        // var web3 = new Web3(new Web3.providers.IpcProvider("\\\\.\\pipe\\geth.ipc", net));
-        console.log(web3.currentProvider);
-        // on windows the path is: "\\\\.\\pipe\\geth.ipc"
-        // on linux the path is: "/users/myuser/.ethereum/geth.ipc"
-
-        // web3.eth.getAccounts(console.log);
-        // web3.eth.getBalance("0x45c5b1adf3ed9c22b2893e179cdfca7c21d16df0").then(function(res) {
-        //     console.log('Franz');
-        //     console.log(res);
-        // });
     }
 
     that.getProductGroups = function (wareHouse) {
