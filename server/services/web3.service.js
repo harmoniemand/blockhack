@@ -4,13 +4,13 @@ var Web3 = require('web3');
 var abis = require('./contracts.abi')();
 var contractAdress = '0x89925ce49720c48cf5ece45d3dd1494699257573';
 // var web3 = new Web3(new Web3.providers.HttpProvider('http://185.194.141.178:8545'));
-var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
-
+// var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+var web3 = new Web3(new Web3.providers.HttpProvider('http://172.20.189.103:8545'));
 
 module.exports = function () {
     var that = this;
 
-    that.getWarehouses() = function() {
+    that.getWarehouses = function() {
         var wareHouses = [
                 {'Name':'Möckmühl', 'address':'0x89925ce49720c48cf5ece45d3dd1494699257573'}, 
                 {'Name':'Osterfeld', 'address':'0xe628ed5cd11cd9c42b7ee0286d91be1f310fbd77'}, 
