@@ -1,0 +1,15 @@
+<h1>Meine Anlieferungen</h1>
+<div class="list-group">
+
+  <a href="#" 
+     *ngFor="let shipping of shippings"
+     class="list-group-item list-group-item-action flex-column align-items-start" >
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{shipping.from | date : 'dd.MM.yy'}} - {{ shipping.bay }}</h5>
+      <small>{{ shipping.productgroup }}</small>
+    </div>
+    <p class="mb-1">Von: {{ shipping.from | date : 'hh:mm' }} bis {{ shipping.to | date : 'hh:mm' }} Uhr</p>
+    <small>{{ shipping.slots.length }} Slots</small>
+  </a>
+
+</div>

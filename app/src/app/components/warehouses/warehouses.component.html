@@ -1,0 +1,25 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">select warehouse</li>
+  </ol>
+</nav>
+
+<div class="d-flex flex-column mt-4" style="height: calc(100vh - 130px);">
+
+  <div class="h-100 container" style="overflow: auto;">
+    <div class="row">
+
+      <ul class="list-group col">
+        <li class="list-group-item" *ngFor="let warehouse of warehouses" (click)="select(warehouse)">
+          <div>{{ warehouse.name }}</div>
+          <div>
+            <small class="ml-auto">{{ warehouse.postAddress }}</small>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+
+  <iframe src="https://www.google.com/maps/d/embed?mid=1pr8A9chVAvxhTk1VrUJFe9GIifEhhFjd" class="h-100"></iframe>
+</div>

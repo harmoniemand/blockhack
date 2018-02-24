@@ -1,20 +1,37 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from './components/login/login.component';
+import { WarehousesComponent } from './components/warehouses/warehouses.component';
+import { ProductgroupsComponent } from './components/productgroups/productgroups.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SlotsComponent } from './components/slots/slots.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/i',
+    redirectTo: '/login',
     pathMatch: 'full',
   },
   {
-    path: 'public',
-    loadChildren: './modules/public/public.module#PublicModule'
+    path: 'login',
+    component: LoginComponent
   },
   {
-    path: 'i',
-    loadChildren: './modules/intern/intern.module#InternModule'
+    path: 'dashboard',
+    component: DashboardComponent
   },
+  {
+    path: 'warehouses',
+    component: WarehousesComponent
+  },
+  {
+    path: 'productgroups',
+    component: ProductgroupsComponent
+  },
+  {
+    path: 'slots',
+    component: SlotsComponent
+  }
 ];
 
 @NgModule({
