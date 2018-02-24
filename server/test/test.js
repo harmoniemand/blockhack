@@ -10,7 +10,7 @@ s3.getWarehouses('0x87e45f56dd4fa459562ae5831b4a6f2673cc660f').then(function (wa
         console.log(element);
         s3.getProductGroups(element['address']).then(function (pgs) {
             Object.keys(pgs).forEach(pg_elem => {
-                s3.getOpenSlots(pg_elem, element['address']);
+                s3.getOpenSlots(pg_elem, element['address']).then(console.log);
             })
         });
 

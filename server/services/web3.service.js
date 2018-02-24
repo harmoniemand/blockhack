@@ -35,11 +35,8 @@ module.exports = function () {
     that.getOpenSlots = function (pg, wareHouse) {
         return new Promise((resolve, reject) => {
             var myContract = new web3.eth.Contract(abis.getTimeSlotManagerAbi(), wareHouse);
-
-            myContract.methods.getFreeSlots(pg).call().then(function (val) {
-                val.forEach(element => {
-                    console.log(element);
-                });
+            myContract.methods.getFreeSlots(web3.utils.fromAscii(pg))
+            .call().then(function (val) {
                 resolve(val);
             });
         });
