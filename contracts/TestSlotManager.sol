@@ -18,8 +18,6 @@ TBD:
         owner = msg.sender;
     }
 
-
-
     //Bays / ProductTypes
     bytes32 typeA = "typeA";
     bytes32 typeB = "typeB";
